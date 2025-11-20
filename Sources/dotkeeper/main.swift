@@ -175,4 +175,8 @@ if args.count > 1 {
     }
 } else {
     print("Usage: dotkeeper <command>")
+    print("> list            - Lists available keeps")
+    print("> status          - Shows active keep")
+    print("> deactivate      - Deactivates the current keep")
+    print("> activate <keep> - Activates a keep")
 }
