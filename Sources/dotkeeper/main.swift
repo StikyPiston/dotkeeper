@@ -149,6 +149,30 @@ func activateKeep(keepName: String) {
     }
 }
 
+func fetchPlot(url: String) {
+    let plotsDir = ranchDir
+
+    print(" Installing plot \(url)...")
+
+    let process = Process()
+    process.currentDirectoryURL = plotsDir
+    process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    process.arguments = ["git", "clone", url]
+
+    do {
+        try process.run()
+        process.waitUntilExit()
+        if process.terminationStatus == 0 {
+            print(" Successfully installed plot \(url)")
+        } else {
+            print(" Failed to install plot \(url), git exited with code \(process.terminationStatus)")
+        }
+    } catch {
+        print(" Error running git: \(error)")
+    }
+}
+
+
 // MARK: - CLI Entry Point
 
 let args = CommandLine.arguments
@@ -170,6 +194,13 @@ if args.count > 1 {
             let keepName = args[2]
             activateKeep(keepName: keepName)
         }
+    case "fetch":
+        if args.count < 3 {
+            print("Usage: dotkeeper fetch <url>")
+        } else {
+            let url = args[2]
+            fetchPlot(url: url)
+        }
     default:
         print("Unknown command")
     }
@@ -179,4 +210,5 @@ if args.count > 1 {
     print("> status          - Shows active keep")
     print("> deactivate      - Deactivates the current keep")
     print("> activate <keep> - Activates a keep")
+    print("> fetch <url>     - Fetches a keep into ~/.dotkeep")
 }
