@@ -97,7 +97,7 @@ func deactivateCurrentKeep() {
 
 func activateKeep(keepName: String) {
     let keepPath = keepDir.appendingPathComponent(keepName)
-    let keepFile = keepPath.appendingPathComponent("plot.json")
+    let keepFile = keepPath.appendingPathComponent("keep.json")
 
     guard fileManager.fileExists(atPath: keepFile.path) else {
         print(" No keep.json found in \(keepName)")
