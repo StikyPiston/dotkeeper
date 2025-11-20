@@ -150,9 +150,9 @@ func activateKeep(keepName: String) {
 }
 
 func fetchPlot(url: String) {
-    let plotsDir = ranchDir
+    let plotsDir = keepDir
 
-    print(" Installing plot \(url)...")
+    print(" Installing keep: \(url)...")
 
     let process = Process()
     process.currentDirectoryURL = plotsDir
