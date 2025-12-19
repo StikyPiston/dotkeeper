@@ -102,6 +102,7 @@ func activateKeep(keepName: String) {
     let keepPath = keepDir.appendingPathComponent(keepName)
     let keepFile = keepPath.appendingPathComponent("keep.json")
 
+
     guard fileManager.fileExists(atPath: keepFile.path) else {
         print(" No keep.json found in \(keepName)")
         return
@@ -113,9 +114,24 @@ func activateKeep(keepName: String) {
         let data = try Data(contentsOf: keepFile)
         let keep = try JSONDecoder().decode(Keep.self, from: data)
         
-        var newLinks: [Link] = []
+        var allLinks = keep.links
 
-        for entry in keep.links {
+        let hSpecPath = keepPath.appendingPathComponent("hSpecs").appendingPathComponent("\(hostname).json")
+
+        if fileManager.fileExists(atPath: hSpecPath.path) {
+            do {
+                let hSpecData = try Data(contentsOf: hSpecPath)
+                let hSpec = try JSONDecoder().decode(Keep.self, from: hSpecData)
+
+                print("󰌨 Applying hSpec for host: \(hostname)")
+
+                allLinks.append(contentsOf: hSpec.links)
+            } catch {
+                print(" Error loading hSpec for \(hostname): \(error)")
+            }
+        }
+
+        for entry in allLinks {
             let source = keepPath.appendingPathComponent(entry.source).path
             let target = NSString(string: entry.target).expandingTildeInPath
 
