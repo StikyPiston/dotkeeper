@@ -149,13 +149,13 @@ func activateKeep(keepName: String) {
     }
 }
 
-func fetchPlot(url: String) {
-    let plotsDir = keepDir
+func fetchKeep(url: String) {
+    let keepsDir = keepDir
 
     print(" Installing keep: \(url)...")
 
     let process = Process()
-    process.currentDirectoryURL = plotsDir
+    process.currentDirectoryURL = keepsDir
     process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
     process.arguments = ["git", "clone", url]
 
@@ -163,9 +163,9 @@ func fetchPlot(url: String) {
         try process.run()
         process.waitUntilExit()
         if process.terminationStatus == 0 {
-            print(" Successfully installed plot \(url)")
+            print(" Successfully installed keep \(url)")
         } else {
-            print(" Failed to install plot \(url), git exited with code \(process.terminationStatus)")
+            print(" Failed to install keep \(url), git exited with code \(process.terminationStatus)")
         }
     } catch {
         print(" Error running git: \(error)")
@@ -199,7 +199,7 @@ if args.count > 1 {
             print("Usage: dotkeeper fetch <url>")
         } else {
             let url = args[2]
-            fetchPlot(url: url)
+            fetchKeep(url: url)
         }
     default:
         print("Unknown command")
