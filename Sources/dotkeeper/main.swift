@@ -89,9 +89,9 @@ func deactivateCurrentKeep() {
         if let _ = try? FileManager.default.destinationOfSymbolicLink(atPath: link.target) {
             do {
                 try FileManager.default.removeItem(atPath: link.target)
-                print(" Removed symlink: \(link.target)")
+                print("\u{001B}[0;31m Removed symlink: \(link.target)\u{001B}[0;0m")
             } catch {
-                print(" Could not remove symlink \(link.target): \(error)")
+                print("\u{001B}[0;31m Could not remove symlink \(link.target): \(error)\u{001B}[0;0m")
             }
         }
     }
@@ -123,14 +123,14 @@ func activateKeep(keepName: String) {
                 let hSpecData = try Data(contentsOf: hSpecPath)
                 let hSpec = try JSONDecoder().decode(Keep.self, from: hSpecData)
 
-                print("󰌨 Applying hSpec for host: \(hostname)")
+                print("\u{001B}[0;32m󰌨 Applying hSpec for host: \(hostname)\u{001B}[0;0m")
 
                 newLinks.append(contentsOf: hSpec.links)
             } catch {
-                print(" Error loading hSpec for \(hostname): \(error)")
+                print("\u{001B}[0;31m Error loading hSpec for \(hostname): \(error)\u{001B}[0;0m")
             }
         } else {
-            print("󰹎 No hSpec will be applied")
+            print("\u{001B}[0;32m󰹎 No hSpec will be applied\u{001B}[0;0m")
         }
 
         for entry in newLinks {
@@ -145,7 +145,7 @@ func activateKeep(keepName: String) {
                     attributes: nil
                 )
             } catch {
-                print(" Failed to create parent directory: \(error)")
+                print("\u{001B}[0;31m Failed to create parent directory: \(error)\u{001B}[0;0m")
                 continue
             }
 
@@ -154,7 +154,7 @@ func activateKeep(keepName: String) {
                 try fileManager.createSymbolicLink(atPath: target, withDestinationPath: source)
                 print(" Linked: \(target) → \(source)")
             } catch {
-                print(" Failed to create symlink: \(error)")
+                print("\u{001B}[0;31m Failed to create symlink: \(error)\u{001B}[0;0m")
                 continue
             }
 
@@ -163,17 +163,17 @@ func activateKeep(keepName: String) {
 
         let newState = State(keep: keepName, links: newLinks)
         saveState(newState)
-        print(" Activated keep: \(keepName)")
+        print("\u{001B}[0;32m Activated keep: \(keepName)\u{001B}[0;0m")
 
     } catch {
-        print(" Failed to read or parse keep.json: \(error)")
+        print("\u{001B}[0;31m Failed to read or parse keep.json: \(error)\u{001B}[0;0m")
     }
 }
 
 func fetchKeep(url: String) {
     let keepsDir = keepDir
 
-    print(" Installing keep: \(url)...")
+    print("\u{001B}[0;34m Installing keep: \(url)...\u{001B}[0;0m")
 
     let process = Process()
     process.currentDirectoryURL = keepsDir
@@ -184,12 +184,12 @@ func fetchKeep(url: String) {
         try process.run()
         process.waitUntilExit()
         if process.terminationStatus == 0 {
-            print(" Successfully installed keep \(url)")
+            print("\u{001B}[0;32m Successfully installed keep \(url)\u{001B}[0;0m")
         } else {
-            print(" Failed to install keep \(url), git exited with code \(process.terminationStatus)")
+            print("\u{001B}[0;31m Failed to install keep \(url), git exited with code \(process.terminationStatus)\u{001B}[0;0m")
         }
     } catch {
-        print(" Error running git: \(error)")
+        print("\u{001B}[0;31m Error running git: \(error)\u{001B}[0;0m")
     }
 }
 
