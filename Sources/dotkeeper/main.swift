@@ -25,6 +25,9 @@ let homeDir     = fileManager.homeDirectoryForCurrentUser
 let keepDir    = homeDir.appendingPathComponent(".dotkeep")
 let stateFile   = homeDir.appendingPathComponent(".dotkeeper-state.json")
 
+// MARK: Hostname
+let hostname = Host.current().name
+
 // MARK: - State Handling
 
 func loadState() -> State {
