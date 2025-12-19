@@ -129,6 +129,8 @@ func activateKeep(keepName: String) {
             } catch {
                 print(" Error loading hSpec for \(hostname): \(error)")
             }
+        } else {
+            print("󰹎 No hSpec will be applied")
         }
 
         for entry in newLinks {
