@@ -26,7 +26,7 @@ let keepDir    = homeDir.appendingPathComponent(".dotkeep")
 let stateFile   = homeDir.appendingPathComponent(".dotkeeper-state.json")
 
 // MARK: Hostname
-let hostname = Host.current().name
+let hostname = ProcessInfo.processInfo.hostName
 
 // MARK: - State Handling
 
