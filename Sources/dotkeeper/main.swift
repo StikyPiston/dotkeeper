@@ -114,7 +114,7 @@ func activateKeep(keepName: String) {
         let data = try Data(contentsOf: keepFile)
         let keep = try JSONDecoder().decode(Keep.self, from: data)
         
-        var allLinks = keep.links
+        var newLinks = keep.links
 
         let hSpecPath = keepPath.appendingPathComponent("hSpecs").appendingPathComponent("\(hostname).json")
 
@@ -125,13 +125,13 @@ func activateKeep(keepName: String) {
 
                 print("󰌨 Applying hSpec for host: \(hostname)")
 
-                allLinks.append(contentsOf: hSpec.links)
+                newLinks.append(contentsOf: hSpec.links)
             } catch {
                 print(" Error loading hSpec for \(hostname): \(error)")
             }
         }
 
-        for entry in allLinks {
+        for entry in newLinks {
             let source = keepPath.appendingPathComponent(entry.source).path
             let target = NSString(string: entry.target).expandingTildeInPath
 
