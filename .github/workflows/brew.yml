@@ -1,4 +1,11 @@
 on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual run'
+        required: true
+        default: 'Manual trigger'
+        type: string
   push:
     tags: '*'
 
