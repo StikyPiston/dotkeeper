@@ -1,0 +1,19 @@
+on:
+  push:
+    tags: '*'
+
+jobs:
+  homebrew:
+    name: Bump Homebrew formula
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mislav/bump-homebrew-formula-action@v3
+        with:
+          # By default, this will edit the `my_formula.rb` formula in
+          # homebrew-core to update its "url" field to:
+          # `https://github.com/OWNER/REPO/archive/refs/tags/<tag-name>.tar.gz`
+          # The "sha256" formula field will get automatically recomputed.
+          formula-name: dotkeeper
+        env:
+          # the personal access token should have "repo" & "workflow" scopes
+          COMMITTER_TOKEN: ${{ secrets.COMMITTER_TOKEN }}
