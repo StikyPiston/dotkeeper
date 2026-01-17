@@ -1,6 +1,6 @@
 # dotkeeper
 
-![assets/preview.png]
+![A preview of Dotkeeper applying a keep](assets/preview.png)
 
 A *keeper* for your *dotfiles*. See what I did there? *(booooooo)*
 
