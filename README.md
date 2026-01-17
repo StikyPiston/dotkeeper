@@ -4,7 +4,7 @@
 
 A *keeper* for your *dotfiles*. See what I did there? *(booooooo)*
 
-To get started, create a folder in `~/.dotkeep` with the name of your **keep**. A **keep** is a place where dots are kept. Like a **plot** in Rancher.
+To get started, create a folder in `~/.dotkeep` with the name of your **keep**. A **keep** is a place where dots are kept.
 
 ## Info
 
@@ -32,7 +32,7 @@ brew install stikypiston/formulae/dotkeeper
 To install manually, first clone the repository.
 
 ```bash
-git clone https://codeberg.org/StikyPiston/dotkeeper
+git clone https://github.com/StikyPiston/dotkeeper
 ```
 
 Then, `cd` into the directory.
@@ -52,9 +52,3 @@ And finally, move the executable into a location like `/usr/local/bin/`
 ```bash
 sudo mv .build/release/dotkeeper /usr/local/bin/
 ```
-
-## Migrating from **Rancher**
-
-You can move `~/.ranch` to `~/.dotkeep`, and rename any `plot.json` files to `keep.json`.
-
-See more documentation in the **Wiki**
