@@ -23,4 +23,4 @@ jobs:
       with:
         swift-version: "6.2"
     - name: Build
-      run: swift build -v --configuration release -Xswiftc -static-stdlib
+      run: swift build -v --configuration release -Xswiftc
