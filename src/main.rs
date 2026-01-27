@@ -128,7 +128,7 @@ fn main() {
             }
         }
         Commands::Status => {
-            println!("status not implemented yet");
+            status();
         }
         Commands::Activate { keep } => {
             println!("activate keep: {keep}");
