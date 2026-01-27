@@ -45,11 +45,11 @@ fn list_keeps() -> std::io::Result<()> {
     let dir = dotkeep_dir();
 
     if !dir.exists() {
-        println!("{} does not exist, please create it.", dir.display());
+        println!("{} does not exist, please create it.", dir.display()); // TODO: Colour red
         return Ok(());
     }
 
-    println!("  Available keeps:"); 
+    println!("  Available keeps:"); // TODO: Colour blue
 
     for entry in fs::read_dir(dir)? {
         let entry = entry?;
