@@ -49,7 +49,7 @@ fn list_keeps() -> std::io::Result<()> {
         return Ok(());
     }
 
-    println!("Available keeps:"); // TODO:: Add nerd font icon
+    println!("  Available keeps:"); 
 
     for entry in fs::read_dir(dir)? {
         let entry = entry?;
