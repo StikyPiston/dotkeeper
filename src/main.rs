@@ -3,6 +3,7 @@ use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::PathBuf;
+use std::path::Path;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct State {
@@ -107,6 +108,17 @@ fn load_state() -> Result<State> {
     Ok(state)
 }
 
+fn save_state(state: &State) -> Result<()> {
+    let path = state_file();
+    let json = serde_json::to_string_pretty(state)
+        .context("Failed to serialize state")?;
+
+    fs::write(&path, json)
+        .with_context(|| format!("Failed to write {}", path.display()))?;
+
+    Ok(())
+}
+
 fn status() -> Result<()> {
     let state = load_state()?;
 
@@ -115,6 +127,46 @@ fn status() -> Result<()> {
     } else {
         println!(" No active keep")
     }
+
+    Ok(())
+}
+
+fn deactivate() -> Result<()> {
+    let mut state = load_state()?;
+
+    let keep = match &state.keep {
+        Some(k) => k.clone(),
+        None => {
+            println!(" No active keep to deactivate");
+            return Ok(());
+        }
+    };
+
+    println!("󰌩 Deactivating keep: {}", keep);
+
+    for link in &state.links {
+        let target = Path::new(&link.target);
+
+        if !target.exists() {
+            continue;
+        }
+
+        let meta = fs::symlink_metadata(target)
+            .with_context(|| format!(" Failed to stat {}", target.display()))?;
+
+        if meta.file_type().is_symlink() {
+            fs::remove_file(target)
+                .with_context(|| format!(" Failed to remove {}", target.display()))?;
+            println!(" Removed symlink: {}", target.display()); // <-- print after deletion
+        }
+    }
+
+    state.keep = None;
+    state.links.clear();
+
+    save_state(&state)?;
+
+    println!(" Keep deactivated");
 
     Ok(())
 }
@@ -135,7 +187,7 @@ fn main() {
             println!("activate keep: {keep}");
         }
         Commands::Deactivate => {
-            println!("deactivate current keep");
+            deactivate();
         }
         Commands::Fetch { url } => {
             println!("fetch keep from: {url}");
