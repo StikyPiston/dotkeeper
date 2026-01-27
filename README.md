@@ -28,7 +28,8 @@ brew install stikypiston/formulae/dotkeeper
 
 #### Dependencies:
 
-- Swift (can be installed with `brew install swift`, or with `swiftly`)
+- Rust (nightly build was used for this, may or may not work on stable)
+    - Can be installed with `rustup`
 
 #### Instructions
 
@@ -47,7 +48,7 @@ cd dotkeeper
 Use `swift` to build the project.
 
 ```bash
-swift build --configuration release
+cargo build --release
 ```
 
 And finally, move the executable into a location like `/usr/local/bin/`
