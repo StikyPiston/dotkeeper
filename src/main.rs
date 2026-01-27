@@ -59,7 +59,7 @@ fn dotkeep_dir() -> PathBuf {
 fn state_file() -> PathBuf {
     dirs::home_dir()
         .expect("No home directory found")
-        .join(".dotkeeper-state-json")
+        .join(".dotkeeper-state.json")
 }
 
 fn list_keeps() -> std::io::Result<()> {
@@ -90,6 +90,7 @@ fn list_keeps() -> std::io::Result<()> {
 
 fn load_state() -> Result<State> {
     let path = state_file();
+    println!("Loaded path from {}", path.display());
 
     if !path.exists() {
         return Ok(State {
