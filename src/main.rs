@@ -101,10 +101,21 @@ fn load_state() -> Result<State> {
     let data =
         fs::read_to_string(&path).with_context(|| format!("Failed to read {}", path.display()))?;
 
-    let state = serde_json::from_str(&data)
-        .context("Failed to parse state file")?;
+    let state = serde_json::from_str(&data).context("Failed to parse state file")?;
 
     Ok(state)
+}
+
+fn status() -> Result<()> {
+    let state = load_state()?;
+
+    if let Some(keep) = state.keep {
+        println!(" Active keep: {}", keep);
+    } else {
+        println!(" No active keep")
+    }
+
+    Ok(())
 }
 
 fn main() {
