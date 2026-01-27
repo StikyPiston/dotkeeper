@@ -1,5 +1,8 @@
 # dotkeeper
 
+> [!WARNING]
+> This is the work-in-progress Rust rewrite branch, it may not work :P
+
 ![A preview of Dotkeeper applying a keep](assets/preview.png)
 
 A *keeper* for your *dotfiles*. See what I did there? *(booooooo)*
