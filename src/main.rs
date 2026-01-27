@@ -1,8 +1,21 @@
 use clap::{Parser, Subcommand};
+use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::PathBuf;
 
-/// dotkeeper — manage dotfile keeps
+#[derive(Debug, Serialize, Deserialize)]
+struct State {
+    keep: Option<String>,
+    links: Vec<Link>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct Link {
+    source: String,
+    target: String,
+}
+
+// Set up CLI
 #[derive(Parser)]
 #[command(name = "dotkeeper")]
 #[command(version)]
