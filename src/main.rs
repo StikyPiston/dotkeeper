@@ -51,6 +51,12 @@ enum Commands {
     },
 }
 
+fn hostname() -> Result<String> {
+    Ok(hostname::get()?
+        .to_string_lossy()
+        .to_string())
+}
+
 fn dotkeep_dir() -> PathBuf {
     dirs::home_dir()
         .expect("No home directory found")
