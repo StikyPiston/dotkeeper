@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use std::fs;
@@ -50,8 +51,15 @@ enum Commands {
 }
 
 fn dotkeep_dir() -> PathBuf {
-    let home = std::env::var("HOME").expect("HOME not set");
-    PathBuf::from(home).join(".dotkeep")
+    dirs::home_dir()
+        .expect("No home directory found")
+        .join(".dotkeep")
+}
+
+fn state_file() -> PathBuf {
+    dirs::home_dir()
+        .expect("No home directory found")
+        .join(".dotkeeper-state-json")
 }
 
 fn list_keeps() -> std::io::Result<()> {
@@ -78,6 +86,25 @@ fn list_keeps() -> std::io::Result<()> {
     }
 
     Ok(())
+}
+
+fn load_state() -> Result<State> {
+    let path = state_file();
+
+    if !path.exists() {
+        return Ok(State {
+            keep: None,
+            links: vec![],
+        });
+    }
+
+    let data =
+        fs::read_to_string(&path).with_context(|| format!("Failed to read {}", path.display()))?;
+
+    let state = serde_json::from_str(&data)
+        .context("Failed to parse state file")?;
+
+    Ok(state)
 }
 
 fn main() {
