@@ -1,5 +1,5 @@
 {
-  description = "Swift devshell using Swift container (Podman, no user config)";
+  description = "Swift devshell using Podman container";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -10,7 +10,7 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
 
-    # Generate a policy.json immutably via Nix
+    # Generate a policy.json
     podmanPolicy = pkgs.writeText "podman-policy.json" ''
       {
         "default": [
