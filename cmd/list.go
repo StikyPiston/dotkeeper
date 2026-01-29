@@ -13,7 +13,6 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists available keeps",
-	Long:  `Usage: dotkeeper list`,
 	Run: func(cmd *cobra.Command, args []string) {
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
