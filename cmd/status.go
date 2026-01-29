@@ -10,7 +10,7 @@ import (
 var statusCmd = &cobra.Command{
 	Use:   "status",
 	Short: "See the currently active keep",
-	Long: "Usage: dotkeeper status",
+	Long:  "Usage: dotkeeper status",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("status called")
 	},
