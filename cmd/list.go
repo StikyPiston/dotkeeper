@@ -12,8 +12,8 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples`,
+	Short: "Lists available keeps",
+	Long: `Usage: dotkeeper list`,
 	Run: func(*cobra.Command, []string) {
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
