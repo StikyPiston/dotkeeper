@@ -24,10 +24,15 @@ var listCmd = &cobra.Command{
 
 		keeps, err := os.ReadDir(keepDir)
 
-		for _, keep := range keeps {
-			if keep.IsDir() == true {
-				fmt.Printf("- %s\n", keep.Name())
+		if keeps != nil {
+			fmt.Println("󰌨 Available keeps:")
+			for _, keep := range keeps {
+				if keep.IsDir() == true {
+					fmt.Printf(" - %s\n", keep.Name())
+				}
 			}
+		} else {
+			fmt.Println(" No keeps available")
 		}
 	},
 }
