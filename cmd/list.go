@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"log"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 )
@@ -13,20 +14,20 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples`,
-	Run: func(*cobra.Command, args, []string) {
+	Run: func(*cobra.Command, []string) {
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		// TODO: Add '.dotkeep' path component
-		keepDir = homeDir
+		keepDir := filepath.Join(homeDir, ".dotkeep")
 
-		keeps, err := os.ReadDir(homeDir)
+		keeps, err := os.ReadDir(keepDir)
 
 		for _, keep := range keeps {
 			// TODO: Check if entry is a directory
-			fmt.println("- %s")
+			fmt.Printf("- %s", keep)
 		}
 	},
 }
