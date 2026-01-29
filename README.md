@@ -26,33 +26,21 @@ brew install stikypiston/formulae/dotkeeper
 
 ### Method 2: Manual Install
 
+#### Dependencies
 
-#### Dependencies:
+To build *dotkeeper*, you will need a working installation of **go**.
 
-- Swift (can be installed with `brew install swift`, or with `swiftly`)
+You can either:
 
-#### Instructions
+1. Install go with your package manager of choice (e.g. `brew`)
+2. Use the **Nix Devshell** to build the project. (just run `nix develop`)
 
-To install manually, first clone the repository.
+#### Building
 
-```bash
-git clone https://github.com/StikyPiston/dotkeeper
-```
-
-Then, `cd` into the directory.
+To build, simply run:
 
 ```bash
-cd dotkeeper
+go build
 ```
 
-Use `swift` to build the project.
-
-```bash
-swift build --configuration release
-```
-
-And finally, move the executable into a location like `/usr/local/bin/`
-
-```bash
-sudo mv .build/release/dotkeeper /usr/local/bin/
-```
+Move the resulting `dotkeeper` binary to some place like `/usr/local/bin` or `~/.local/bin`
