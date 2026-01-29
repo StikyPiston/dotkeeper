@@ -20,11 +20,6 @@
             gotools
             delve
           ];
-
-          shellHook = ''
-            echo "dotkeeper Go devshell"
-            echo "Go version: $(go version)"
-          '';
         };
       });
 }
