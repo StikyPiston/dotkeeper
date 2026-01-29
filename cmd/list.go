@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
@@ -13,7 +13,7 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists available keeps",
-	Long: `Usage: dotkeeper list`,
+	Long:  `Usage: dotkeeper list`,
 	Run: func(*cobra.Command, []string) {
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
@@ -26,22 +26,13 @@ var listCmd = &cobra.Command{
 		keeps, err := os.ReadDir(keepDir)
 
 		for _, keep := range keeps {
-			// TODO: Check if entry is a directory
-			fmt.Printf("- %s", keep)
+			if keep.IsDir() == true {
+				fmt.Printf("- %s\n", keep.Name())
+			}
 		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(listCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// listCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
