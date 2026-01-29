@@ -14,7 +14,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists available keeps",
 	Long:  `Usage: dotkeeper list`,
-	Run: func(*cobra.Command, []string) {
+	Run: func(cmd *cobra.Command, args []string) {
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			log.Fatal(err)
