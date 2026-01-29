@@ -18,6 +18,7 @@ var listCmd = &cobra.Command{
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			log.Fatal(err)
+			return
 		}
 
 		keepDir := filepath.Join(homeDir, ".dotkeep")
@@ -25,6 +26,7 @@ var listCmd = &cobra.Command{
 		keeps, err := os.ReadDir(keepDir)
 		if err != nil {
 			fmt.Println(" No keeps available")
+			return
 		}
 
 		if keeps != nil {

@@ -40,7 +40,7 @@ var statusCmd = &cobra.Command{
 
 		err = json.Unmarshal(state, &data)
 		if err != nil {
-			fmt.Printf("󰌩 No active keep")
+			fmt.Println("󰌩 No active keep")
 			return
 		}
 
