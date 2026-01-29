@@ -1,5 +1,9 @@
 # dotkeeper
 
+> [!WARNING]
+> This is the old, unmaintaned **swift** version of dotkeeper.
+> While you are more than welcome to use it, it will not be updated any further
+
 ![A preview of Dotkeeper applying a keep](assets/preview.png)
 
 A *keeper* for your *dotfiles*. See what I did there? *(booooooo)*
