@@ -29,6 +29,7 @@ var statusCmd = &cobra.Command{
 		homeDir, err := os.UserHomeDir()
 		if err != nil {
 			log.Fatal(err)
+			return
 		}
 
 		stateFile := filepath.Join(homeDir, ".dotkeeper-state.json")
@@ -39,11 +40,12 @@ var statusCmd = &cobra.Command{
 
 		err = json.Unmarshal(state, &data)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Printf("󰌩 No active keep")
+			return
 		}
 
 		if data.Keep != "" {
-			fmt.Println(" Active keep: %s", data.Keep)
+			fmt.Printf(" Active keep: %s", data.Keep)
 		} else {
 			fmt.Println("󰌩 No active keep")
 		}
