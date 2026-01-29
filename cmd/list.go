@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -10,8 +12,23 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples`
-	Run: 
+	Long: `A longer description that spans multiple lines and likely contains examples`,
+	Run: func(*cobra.Command, args, []string) {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// TODO: Add '.dotkeep' path component
+		keepDir = homeDir
+
+		keeps, err := os.ReadDir(homeDir)
+
+		for _, keep := range keeps {
+			// TODO: Check if entry is a directory
+			fmt.println("- %s")
+		}
+	},
 }
 
 func init() {
