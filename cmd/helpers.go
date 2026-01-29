@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"github.com/fatih/color"
 )
 
 func LoadKeep(keepRoot string) ([]Link, error) {
@@ -38,7 +39,7 @@ func LoadKeep(keepRoot string) ([]Link, error) {
 		if err := json.Unmarshal(hData, &hSpec); err != nil {
 			return nil, fmt.Errorf(" Failed to parse hSpec: %w", err)
 		}
-		fmt.Println("󰌨 Applying hSpec for host: " + hostname)
+		color.Green("󰌨 Applying hSpec for host: " + hostname)
 
 		allLinks = append(allLinks, hSpec.Links...)
 	}

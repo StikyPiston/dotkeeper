@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 func LoadState() (State, error) {
@@ -41,26 +42,26 @@ func DeactivateKeep() error {
 	}
 
 	if len(st.Links) == 0 {
-		fmt.Println(" No active keep to deactivate.")
+		color.Green(" No active keep to deactivate.")
 		return nil
 	}
 
 	for _, link := range st.Links {
 		dest, err := ExpandPath(link.Target)
 		if err != nil {
-			fmt.Printf(" Cannot expand %s: %v\n", link.Target, err)
+			color.Red(" Cannot expand %s: %v\n", link.Target, err)
 			continue
 		}
 
 		if fi, err := os.Lstat(dest); err == nil {
 			if fi.Mode()&os.ModeSymlink != 0 || fi.Mode().IsRegular() {
 				if err := os.Remove(dest); err != nil {
-					fmt.Printf(" Cannot remove %s: %v\n", dest, err)
+					color.Red(" Cannot remove %s: %v\n", dest, err)
 				} else {
-					fmt.Printf(" Removed: %s\n", dest)
+					color.Red(" Removed: %s\n", dest)
 				}
 			} else {
-				fmt.Printf("󰒭 Skipping non-symlink: %s\n", dest)
+				color.Blue("󰒭 Skipping non-symlink: %s\n", dest)
 			}
 		}
 	}
@@ -73,7 +74,7 @@ func DeactivateKeep() error {
 		return fmt.Errorf(" Failed to write empty state: %w", err)
 	}
 
-	fmt.Println(" Deactivated keep")
+	color.Green(" Deactivated keep")
 	return nil
 }
 

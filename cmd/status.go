@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 // statusCmd represents the status command
@@ -29,14 +29,14 @@ var statusCmd = &cobra.Command{
 
 		err = json.Unmarshal(state, &data)
 		if err != nil {
-			fmt.Println("󰌩 No active keep")
+			color.Red("󰌩 No active keep")
 			return
 		}
 
 		if data.Keep != "" {
-			fmt.Println(" Active keep: %s", data.Keep)
+			color.Green(" Active keep: %s", data.Keep)
 		} else {
-			fmt.Println("󰌩 No active keep")
+			color.Red("󰌩 No active keep")
 		}
 	},
 }

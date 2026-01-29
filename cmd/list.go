@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 // listCmd represents the list command
@@ -24,19 +25,19 @@ var listCmd = &cobra.Command{
 
 		keeps, err := os.ReadDir(keepDir)
 		if err != nil {
-			fmt.Println(" No keeps available")
+			color.Red(" No keeps available")
 			return
 		}
 
 		if keeps != nil {
-			fmt.Println("󰌨 Available keeps:")
+			color.Green("󰌨 Available keeps:")
 			for _, keep := range keeps {
 				if keep.IsDir() == true {
 					fmt.Printf(" - %s\n", keep.Name())
 				}
 			}
 		} else {
-			fmt.Println(" No keeps available")
+			color.Red(" No keeps available")
 		}
 	},
 }

@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	"github.com/fatih/color"
 )
 
 func CreateSymlink(keepName, src, dest string) error {
@@ -50,9 +51,9 @@ var activateCmd = &cobra.Command{
 
 		for _, link := range links {
 			if err := CreateSymlink(keep, link.Source, link.Target); err != nil {
-				fmt.Printf(" Error creating symlink: %s -> %s\n", link.Target, link.Source)
+				color.Red(" Error creating symlink: %s -> %s\n", link.Target, link.Source)
 			} else {
-				fmt.Printf(" Symlinked %s -> %s\n", link.Target, link.Source)
+				color.Blue(" Symlinked %s -> %s\n", link.Target, link.Source)
 			}
 		}
 
@@ -67,7 +68,7 @@ var activateCmd = &cobra.Command{
 			log.Fatal(" Failed to write state file: %s", err)
 		}
 
-		fmt.Printf(" Activated keep: %s\n", keep)
+		color.Green(" Activated keep: %s\n", keep)
 	},
 }
 
