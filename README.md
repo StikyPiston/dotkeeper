@@ -1,9 +1,5 @@
 # dotkeeper
 
-> [!WARNING]
-> This is the experimental **go** rewrite of dotkeeper.
-> Some functionality may not be implemented
-
 ![A preview of Dotkeeper applying a keep](assets/preview.png)
 
 A *keeper* for your *dotfiles*. See what I did there? *(booooooo)*
