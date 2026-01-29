@@ -45,7 +45,7 @@ var statusCmd = &cobra.Command{
 		}
 
 		if data.Keep != "" {
-			fmt.Printf(" Active keep: %s", data.Keep)
+			fmt.Println(" Active keep: %s", data.Keep)
 		} else {
 			fmt.Println("󰌩 No active keep")
 		}

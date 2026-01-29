@@ -24,7 +24,7 @@ var listCmd = &cobra.Command{
 
 		keeps, err := os.ReadDir(keepDir)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Println(" No keeps available")
 		}
 
 		if keeps != nil {
