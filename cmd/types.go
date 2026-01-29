@@ -5,6 +5,10 @@ type State struct {
 	Links []Link `json:"links"`
 }
 
+type Keep struct {
+	Links []Link `json:"links"`
+}
+
 type Link struct {
 	Source string `json:"source"`
 	Target string `json:"target"`
