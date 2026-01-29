@@ -10,16 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type State struct {
-	Keep  string `json:"keep"`
-	Links []Link `json:"links"`
-}
-
-type Link struct {
-	Source string `json:"source"`
-	Target string `json:"target"`
-}
-
 // statusCmd represents the status command
 var statusCmd = &cobra.Command{
 	Use:   "status",
