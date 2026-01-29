@@ -20,7 +20,6 @@ var listCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		// TODO: Add '.dotkeep' path component
 		keepDir := filepath.Join(homeDir, ".dotkeep")
 
 		keeps, err := os.ReadDir(keepDir)
