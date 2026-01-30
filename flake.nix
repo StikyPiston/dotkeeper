@@ -1,5 +1,5 @@
 {
-  description = "dotkeeper (Go rewrite) devshell";
+  description = "Dotkeeper devshell and package";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -12,7 +12,7 @@
         pkgs = import nixpkgs { inherit system; };
       in {
         devShells.default = pkgs.mkShell {
-          name = "dotkeeper-go-shell";
+          name = "recall-devshell";
 
           packages = with pkgs; [
             go
@@ -20,6 +20,29 @@
             gotools
             delve
           ];
+        };
+
+        packages.dotkeeper = pkgs.buildGoModule {
+          pname = "dotkeeper";
+          version = "2026.01.29-a";
+
+          src = self;
+
+          vendorHash = "sha256-FBb8RFndx6wwdu08B95d+qas4VWs6Vr7UrXVGLyCW0g=";
+
+          subPackages = [ "." ];
+          ldflags = [ "-s" "-w" ];
+
+          meta = with pkgs.lib; {
+            description = "A simple, flexible symlink farm tool";
+            license = licenses.mit;
+            platforms = platforms.linux;
+          };
+        };
+
+        apps.recall = {
+          type = "app";
+          program = "${self.packages.${system}.recall}/bin/dotkeeper";
         };
       });
 }
