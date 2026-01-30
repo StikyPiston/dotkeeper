@@ -12,7 +12,7 @@
         pkgs = import nixpkgs { inherit system; };
       in {
         devShells.default = pkgs.mkShell {
-          name = "recall-devshell";
+          name = "dotkeeper-devshell";
 
           packages = with pkgs; [
             go
@@ -40,9 +40,9 @@
           };
         };
 
-        apps.recall = {
+        apps.dotkeeper = {
           type = "app";
-          program = "${self.packages.${system}.recall}/bin/dotkeeper";
+          program = "${self.packages.${system}.dotkeeper}/bin/dotkeeper";
         };
       });
 }
