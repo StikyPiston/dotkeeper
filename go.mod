@@ -3,7 +3,7 @@ module github.com/stikypiston/dotkeeper
 go 1.25.5
 
 require (
-	github.com/charmbracelet/fang v0.4.4
+	github.com/charmbracelet/fang v1.0.0
 	github.com/fatih/color v1.18.0
 	github.com/spf13/cobra v1.10.2
 )
