@@ -24,7 +24,7 @@
 
         packages.dotkeeper = pkgs.buildGoModule {
           pname = "dotkeeper";
-          version = "2026.03.14-a";
+          version = "2026.03.17-a";
 
           src = self;
 
